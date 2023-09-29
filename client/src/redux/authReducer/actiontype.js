@@ -1,0 +1,7 @@
+export const LOGIN_REQ="LOGIN_REQ"
+export const LOGOUT = 'LOGOUT'
+export const SIGN_SUCCESS="SIGN_SUCCESS"
+export const LOGIN_SUCCESS="LOGIN_SUCCESS"
+export const LOGIN_FAIL="LOGIN_FAIL"
+export const STORE_TOKEN='STORE_TOKEN'
+export const GOOGLE_LOGIN_SUCCESS='GOOGLE_LOGIN_SUCCESS'
