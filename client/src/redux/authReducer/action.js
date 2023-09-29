@@ -77,24 +77,24 @@ export const logout = async(dispatch) => {
   }
 }
 
-// export const googlelogin = () => () => {
-//   window.open('https://stylehub-vb4k.onrender.com/auth/google', '_self');
-//   return
-// };
+export const googlelogin = () => () => {
+  window.open('http://localhost:8000/auth/google', '_self');
+  return
+};
 
-// export const googleLoginSuccess = (userData,user, token) => (dispatch) => {
-//   console.log(token)
-//   dispatch(loginSuccessWithToken(token)); // Set the token in Redux
-//   dispatch({
-//     type: GOOGLE_LOGIN_SUCCESS,
-//     payload: {
-//       userData,
-//       token,
-//       user
-//     },
-//   });
-//   return
-// };
+export const googleLoginSuccess = (userData,user, token) => (dispatch) => {
+  console.log(token)
+  dispatch(loginSuccessWithToken(token)); // Set the token in Redux
+  dispatch({
+    type: GOOGLE_LOGIN_SUCCESS,
+    payload: {
+      userData,
+      token,
+      user
+    },
+  });
+  return
+};
 
 export const loginSuccessWithToken = (userData,token,msg,user) => (dispatch) => {
   // You can add logic here to validate the token on the server-side if needed

@@ -42,9 +42,9 @@ const Login = () => {
     // Show toast notification based on authentication status
   };
 
-//   const handleGoogleLogin = () => {
-//     dispatch(googlelogin())
-//   };
+  const handleGoogleLogin = () => {
+    dispatch(googlelogin())
+  };
   useEffect(() => {
     console.log(isAuth, isErr);
     messageRef.current = message;
@@ -90,7 +90,7 @@ const Login = () => {
         Log In
       </Button>
       
-      {/* <Button
+      <Button
         leftIcon={<FaGoogle />}
         colorScheme="blue"
         variant="solid"
@@ -98,7 +98,7 @@ const Login = () => {
         onClick={handleGoogleLogin}
       >
         Log in with Google
-      </Button> */}
+      </Button>
       {/* </IconButton> */}
     </Stack>
   );

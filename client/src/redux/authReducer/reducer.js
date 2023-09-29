@@ -26,17 +26,17 @@ export const reducer=(state=initial,{type,payload})=>{
             return {...state,isLoad:false,isAuth:true,token:payload.token,user:payload.user,message:payload.msg,isErr:false}
         case LOGIN_FAIL:
             return {...state,isErr:true,message:payload,isLoad:false}
-        // case GOOGLE_LOGIN_SUCCESS:
-            
-        //     let info = initial.token
-        //     console.log(info,'22 reducer')
-        //     return {
-        //           ...state,
-        //           user: payload.user,
-        //           token: payload.token,
-        //           isAuth: true,
+
+        case GOOGLE_LOGIN_SUCCESS:
+            let info = initial.token
+            console.log(info,'22 reducer')
+            return {
+                  ...state,
+                  user: payload.user,
+                  token: payload.token,
+                  isAuth: true,
                   
-        //         };
+        };
 
         case LOGOUT:
             return {...state,user:{},token:null,isAuth:false}
