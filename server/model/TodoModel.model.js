@@ -4,6 +4,9 @@ const { UserModel } = require('./userModel.model');
 const taskSchema = new mongoose.Schema({
   title: { type: String, required: true },
   description: String,
+  start: Date,
+  end: Date,
+  time: String, // You can change the type to match your time representation
   status: { type: String, enum: ['Done', 'Not Done'], default: 'Not Done' },
   priority: { type: String, enum: ['Low', 'Medium', 'High'], required: true },
   user: {
