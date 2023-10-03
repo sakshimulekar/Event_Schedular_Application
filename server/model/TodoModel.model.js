@@ -6,9 +6,8 @@ const taskSchema = new mongoose.Schema({
   description: String,
   start: Date,
   end: Date,
-  time: String, // You can change the type to match your time representation
-  status: { type: String, enum: ['Done', 'Not Done'], default: 'Not Done' },
-  priority: { type: String, enum: ['Low', 'Medium', 'High'], required: true },
+  // status: { type: String, enum: ['Done', 'Not Done'], default: 'Not Done' },
+  // priority: { type: String, enum: ['Low', 'Medium', 'High'], required: true },
   user: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'UserModel',
