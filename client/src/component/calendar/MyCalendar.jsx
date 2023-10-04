@@ -1,5 +1,4 @@
-// MyCalendar.js
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Calendar, dateFnsLocalizer } from 'react-big-calendar';
 import format from 'date-fns/format';
 import parse from 'date-fns/parse';
@@ -9,13 +8,14 @@ import enUS from 'date-fns/locale/en-US';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 import AddEvent from './AddEvent';
 import { useDispatch, useSelector } from 'react-redux';
-import { deleteEvent, getEvent } from '../../redux/todoReducer/action';
+import { deleteEvent, editEventData, getEvent } from '../../redux/todoReducer/action';
 import EditEvent from './EditEvent';
+import { Box, Button, Center, Flex, Icon, Tooltip, useDisclosure } from '@chakra-ui/react';
+import { DeleteIcon, EditIcon } from '@chakra-ui/icons';
 
 const locales = {
   'en-US': enUS,
 };
-
 const localizer = dateFnsLocalizer({
   format,
   parse,
@@ -25,63 +25,108 @@ const localizer = dateFnsLocalizer({
 });
 
 const MyCalendar = () => {
-  //const [events, setEvents] = useState([]); // State to manage the list of events
-  const events = useSelector((store)=>store.todoReducer.events)
+  // const { isOpen, onOpen, onClose } = useDisclosure();
+  const events = useSelector((store) => store.todoReducer.events);
   const [selectedEvent, setSelectedEvent] = useState(null);
-  const dispatch = useDispatch()
-  //console.log(event,'28')
-  useEffect(()=>{
-    dispatch(getEvent())
-    console.log(events,'33')
-  },[])
+  const [isModalOpen, setisModalOpen] = useState(false);
+  const dispatch = useDispatch();
+  const [isrender,setIsRender]=useState(false)
 
+  useEffect(() => {
+    dispatch(getEvent());
+    
+  }, [dispatch,isrender]);
 
   const handleSelectEvent = (event) => {
     setSelectedEvent(event);
   };
 
-  const onEditEvent=(event)=>{
-    //console.log(event)
-  }
-  const onDeleteEvent=(event)=>{
-    const id = event.event._id
-    console.log(event,id)
+  const onEditEvent = (event) => {
+    console.log(event, '49');
+    setSelectedEvent(event.event)
+    setisModalOpen(true);
+    
+  };
+  const onCloseEditModal = () => {
+    setisModalOpen(false); // Close the edit modal
+    // You may perform any additional actions needed when closing the modal here
+  };
+  
 
-    dispatch(deleteEvent(id))
-    dispatch(getEvent())
-  }
+  const onDeleteEvent = (event) => {
+    const id = event.event._id;
+    dispatch(deleteEvent(id));
+    //dispatch(getEvent());
+    setIsRender(p=>!p)
+  };
+
+  const handleEditSave = (updateEvent) => {
+    console.log(updateEvent,'65');
+    dispatch(editEventData(updateEvent._id,updateEvent))
+    
+    setIsRender(p=>!p)
+    // Close the modal after saving
+  };
+
   return (
-    <div>
-      <AddEvent /> {/* Pass the callback to the form */}
-      <div style={{ height: '500px' }}>
-      <Calendar
-  localizer={localizer}
-  events={Array.isArray(events) ? events.map(event => ({
-    ...event,
-    start: new Date(event.start),
-    end: new Date(event.end),
-  })) : []}
-  startAccessor="start"
-  endAccessor="end"
-  onSelectEvent={handleSelectEvent}
-  style={{ margin: '20px' }}
-  components={{
-    event: (event) => (
-      <div>
-        <strong>{event.title}</strong>
-        <div>{event.description}</div>
-        {/* Edit and Delete Buttons */}
-        <button onClick={() => onEditEvent(event)}>Edit</button>
-        <button onClick={() => onDeleteEvent(event)}>Delete</button>
-      </div>
-    ),
-  }}
-/>
+    <Box w={'80%'} m={'auto'} boxShadow={'lg'}>
+      <Flex mr={10} justifyContent={'flex-end'}><AddEvent isrender={isrender} setIsRender={setIsRender}/></Flex>
+      <Center>
+        <Box w={'80%'} h={'120vh'}>
+          <Calendar
+            localizer={localizer}
+            events={Array.isArray(events)
+              ? events.map((event) => ({
+                  ...event,
+                  start: new Date(event.start),
+                  end: new Date(event.end),
+                }))
+              : []}
+            startAccessor="start"
+            endAccessor="end"
+            onSelectEvent={handleSelectEvent}
+            style={{ margin: '20px' }}
+            components={{
+              event: (event) => (
+                <Box>
+                  <Flex justifyContent={'space-between'}>
+                    <Box>
+                      <strong>{event.title}</strong>
+                      <div>{event.description}</div>
+                    </Box>
+                    <Box>
+                      {/* Edit and Delete Buttons */}
+                      <Button
+                       
+                        onClick={() => onEditEvent(event)}
+                        // backgroundColor={'green'}
+                        
+                        backgroundColor={'transparent'}
+                      >
+                        <Icon as={EditIcon} />
+                      </Button>
+                      <Button
+                        onClick={() => onDeleteEvent(event)}
+                        // backgroundColor={'red'}
+                        color={'red'}
+                        backgroundColor={'transparent'}
+                      >
+                        <Icon as={DeleteIcon} />
+                      </Button>
+                    </Box>
+                  </Flex>
+                </Box>
+              ),
+            }}
+          />
+        </Box>
+      </Center>
 
-
-      
-      </div>
-    </div>
+      {/* Edit Event Modal */}
+      {isModalOpen && selectedEvent && (
+        <EditEvent event={selectedEvent} onSave={handleEditSave} onClose={onCloseEditModal} />
+      )}
+    </Box>
   );
 };
 

@@ -92,9 +92,12 @@ const Login = () => {
       
       <Button
         leftIcon={<FaGoogle />}
-        colorScheme="blue"
+        backgroundColor="black"
+        color={'white'}
         variant="solid"
         size="lg"
+        _hover={{ backgroundColor: 'gray.700' }}
+        _active={{ backgroundColor: 'gray.800' }}
         onClick={handleGoogleLogin}
       >
         Log in with Google

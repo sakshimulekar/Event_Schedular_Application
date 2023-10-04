@@ -24,7 +24,7 @@ TodoRouter.post('/create', auth, async (req, res) => {
         user: req.user._id, // Attach the user's ObjectId to the task
       });
       await newTask.save();
-      res.status(201).json(newTask);
+      res.status(201).json({event:newTask,msg:'Event Added successfully!!'});
     } catch (error) {
       console.error('Error creating task:', error);
       res.status(500).json({ error: 'Unable to create task' });
@@ -56,7 +56,7 @@ TodoRouter.put('/tasks/:taskId', auth, async (req, res) => {
       return res.status(404).json({ error: 'Task not found' });
     }
 
-    res.status(200).json({ msg: 'Task updated', updatedTask });
+    res.status(200).json({ msg: 'Event updated successfully!!', updatedTask });
   } catch (error) {
     console.error('Error updating task:', error);
     res.status(500).json({ error: 'Unable to update task' });
@@ -77,7 +77,7 @@ TodoRouter.delete('/tasks/:taskId', auth, async (req, res) => {
         return res.status(404).json({ error: 'Task not found' });
       }
   
-      res.status(200).json({msg:'task delete',deletedTask});
+      res.status(200).json({msg:'Event deleted!!',deletedTask});
     } catch (error) {
       console.error('Error deleting task:', error);
       res.status(500).json({ error: 'Unable to delete task' });
