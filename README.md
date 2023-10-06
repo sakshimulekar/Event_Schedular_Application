@@ -34,12 +34,18 @@ Tech Stack
 MREN Stack:
 
 MongoDB: Database for storing user and event data.
+
 React: Front-end user interface.
+
 Redux: State management for the application.
+
 Express.js: Backend server to handle API requests.
+
 Authentication:
 JWT (JSON Web Tokens) for secure user authentication.
+
 Google OAuth for a seamless sign-in experience.
+
 UI Framework:
 
 Chakra UI: Provides a set of accessible and customizable UI components for building the user interface.
