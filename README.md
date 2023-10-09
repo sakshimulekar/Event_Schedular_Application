@@ -3,6 +3,10 @@
 
 Event Scheduler Mini App is a web application built using React, Redux, Node.JS, Express.js, MongoDB and Chakra UI, designed to help users manage their events efficiently. This app provides features like event addition, editing, deletion, and visualization on a user-friendly UI. It also offers authentication options via JWT and Google OAuth for secure access to the app.
 
+
+
+![Screenshot (288)](https://github.com/sakshimulekar/Event_Schedular_Application/assets/115461676/3945df79-1f01-4382-85c8-705f6e0794a2)
+
 Features
 
 User Authentication:
