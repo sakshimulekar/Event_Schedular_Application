@@ -6,6 +6,9 @@ Event Scheduler Mini App is a web application built using React, Redux, Node.JS,
 
 
 ![Screenshot (288)](https://github.com/sakshimulekar/Event_Schedular_Application/assets/115461676/3945df79-1f01-4382-85c8-705f6e0794a2)
+![Screenshot (295)](https://github.com/sakshimulekar/Event_Schedular_Application/assets/115461676/8f8fd205-1b5f-4eff-b8ae-aeb053616c88)
+![Screenshot (296)](https://github.com/sakshimulekar/Event_Schedular_Application/assets/115461676/f7ad307a-80bd-429c-af6d-7773b19aea53)
+![Screenshot (299)](https://github.com/sakshimulekar/Event_Schedular_Application/assets/115461676/da615aa6-9102-4cff-91d0-d01ccad8a4c8)
 
 Features
 
